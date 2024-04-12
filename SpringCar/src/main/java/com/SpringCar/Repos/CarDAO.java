@@ -1,6 +1,6 @@
-package com.SpringCar.Repo;
+package com.SpringCar.Repos;
 
-import com.SpringCar.Model.Car;
+import com.SpringCar.Models.Car;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

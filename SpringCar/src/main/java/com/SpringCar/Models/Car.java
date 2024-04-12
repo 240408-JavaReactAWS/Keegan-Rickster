@@ -1,4 +1,4 @@
-package com.SpringCar.Model;
+package com.SpringCar.Models;
 
 import jakarta.persistence.*;
 
