@@ -21,4 +21,9 @@ public class CarService {
     public List<Car> getAllCars() {
         return carDao.findAll();
     }
+
+    //find car by its ID or return an exception
+    public Car findCarByID(int id) {
+        return carDao.findById(id).orElseThrow(() -> new CarNotFoundException("No car by this ID found: " +id));
+    }
 }
