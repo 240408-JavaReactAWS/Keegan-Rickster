@@ -25,4 +25,18 @@ public class CarController {
         return carService.getAllCars();
    }
 
+   //Get car by its ID
+   @GetMapping("{id}")
+    public ResponseEntity<Car> getCarByID(@PathVariable int id) {
+        Car car;
+
+        try {
+            car = carService.findCarByID(id);
+        } catch (CarNotFoundException e) {
+            return  new ResponseEntity<>(NOT_FOUND);
+       }
+
+        return new ResponseEntity<>(car, OK);
+   }
+
 }
