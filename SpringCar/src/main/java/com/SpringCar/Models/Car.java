@@ -15,6 +15,9 @@ public class Car {
     private String model;
     private String make;
     private String color;
+    @ManyToOne
+    @JoinColumn(name = "fk_user_id")
+    private User user;
 
     public Car() {
 
@@ -25,6 +28,14 @@ public class Car {
         this.model = model;
         this.make = make;
         this.color = color;
+    }
+
+    public Car(int id, String model, String make, String color, User user) {
+        this.id = id;
+        this.model = model;
+        this.make = make;
+        this.color = color;
+        this.user = user;
     }
 
     public int getId() {
