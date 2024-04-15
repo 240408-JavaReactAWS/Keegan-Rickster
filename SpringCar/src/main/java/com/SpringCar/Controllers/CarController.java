@@ -42,6 +42,7 @@ public class CarController {
         return new ResponseEntity<>(car, OK);
    }
 
+   //Add a new car to the database
    @PostMapping
     public Car createNewCar(@RequestBody Car car) {
         return carService.addCar(car);
