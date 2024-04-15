@@ -27,6 +27,7 @@ public class CarService {
         return carDao.findById(id).orElseThrow(() -> new CarNotFoundException("No car by this ID found: " +id));
     }
 
+    //Save a car to the database
     public Car addCar(Car car) {
         return carDao.save(car);
     }
