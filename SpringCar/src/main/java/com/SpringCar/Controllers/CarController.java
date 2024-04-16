@@ -84,8 +84,11 @@ public class CarController {
    }
 
    //Add a new car to the database
-   @PostMapping
-    public Car createNewCar(@RequestBody Car car) {
+   @PostMapping("/register/{userId}")
+    public Car createNewCar(@RequestBody Car car, @PathVariable int userId) {
+        User user = userService.getById(userId);
+        user.setId(userId);
+        car.setUser(user);
         return carService.addCar(car);
    }
 

@@ -3,6 +3,8 @@ package com.SpringCar.Models;
 import jakarta.persistence.*;
 import org.hibernate.annotations.NotFound;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -21,6 +23,11 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     private UserRole role;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Car> cars = new ArrayList<>();
+
+
 
     public User(){
 
