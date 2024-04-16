@@ -36,7 +36,7 @@ public class CarController {
         try {
             car = carService.findCarByID(id);
         } catch (CarNotFoundException e) {
-            return  new ResponseEntity<>(NOT_FOUND);
+            return new ResponseEntity<>(NOT_FOUND);
        }
 
         return new ResponseEntity<>(car, OK);
@@ -46,6 +46,16 @@ public class CarController {
    @PostMapping
     public Car createNewCar(@RequestBody Car car) {
         return carService.addCar(car);
+   }
+
+   //update an existing car in the database
+   @PutMapping("{id}")
+    public ResponseEntity<Car> updateCar(@PathVariable int id, @RequestBody Car carInfo) {
+        try {
+            return new ResponseEntity<>(carService.updateCar(id, carInfo), OK);
+        } catch (CarNotFoundException e) {
+            return new ResponseEntity<>(NOT_FOUND);
+        }
    }
 
 }
