@@ -6,12 +6,9 @@ import com.SpringCar.Models.UserRole;
 import com.SpringCar.Services.CarService;
 import com.SpringCar.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -80,10 +77,26 @@ public class CarController {
         try {
             car = carService.findCarByID(id);
         } catch (CarNotFoundException e) {
-            return  new ResponseEntity<>(NOT_FOUND);
+            return new ResponseEntity<>(NOT_FOUND);
        }
 
         return new ResponseEntity<>(car, OK);
+   }
+
+   //Add a new car to the database
+   @PostMapping
+    public Car createNewCar(@RequestBody Car car) {
+        return carService.addCar(car);
+   }
+
+   //update an existing car in the database
+   @PutMapping("{id}")
+    public ResponseEntity<Car> updateCar(@PathVariable int id, @RequestBody Car carInfo) {
+        try {
+            return new ResponseEntity<>(carService.updateCar(id, carInfo), OK);
+        } catch (CarNotFoundException e) {
+            return new ResponseEntity<>(NOT_FOUND);
+        }
    }
 
 
