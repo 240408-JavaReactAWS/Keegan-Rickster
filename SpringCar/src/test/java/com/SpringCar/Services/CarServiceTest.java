@@ -27,7 +27,6 @@ class CarServiceTest {
         List<Car> caList = new ArrayList<>();
         caList.add(car1);
         caList.add(car2);
-
        assertEquals(2,caList.size());
 
     }

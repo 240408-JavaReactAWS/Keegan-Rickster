@@ -15,9 +15,12 @@ public class CarService {
 
     private CarDAO carDao;
 
+    private UserDAO userDao;
+
     @Autowired
-    public CarService(CarDAO carDao){
+    public CarService(CarDAO carDao, UserDAO userDao){
         this.carDao = carDao;
+        this.userDao = userDao;
     }
 
     public List<Car> getAllCars() {
@@ -29,7 +32,9 @@ public class CarService {
     public List<Car> getCarsByUserId(int id) {
         List<Car> userCars = carDao.findByUserId(id);
 
-        if(userCars.isEmpty()){
+        boolean userExist = userDao.existsById(id);
+
+        if(!userExist){
             throw new CarNotFoundException("No car found with user id " + id);
         }
         return userCars;
@@ -56,5 +61,18 @@ public class CarService {
         carDao.save(update);
 
         return update;
+    }
+
+    public void deleteById(int id) {
+        Optional<Car> car = carDao.findById(id);
+        if(!car.isPresent()){
+            throw new CarNotFoundException("Car with id " + id + " could not be found");
+        }
+        carDao.deleteById(id);
+    }
+
+    public boolean existsById(int id) {
+
+        return carDao.existsById(id);
     }
 }

@@ -40,9 +40,9 @@ public class CarController {
         try{
             cars = carService.getAllCars();
         }catch(CarNotFoundException e){
-            return new ResponseEntity<>(NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-       return new ResponseEntity<>(cars, OK); // Returns a 200
+       return new ResponseEntity<>(cars, HttpStatus.OK); // Returns a 200
    }
 
     @GetMapping("/user/{id}")
@@ -67,6 +67,15 @@ public class CarController {
         return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
     }
 
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteCar(@PathVariable int id) {
+        if (carService.existsById(id)) {
+            carService.deleteById(id);
+            return ResponseEntity.ok("Car with id " + id + " deleted successfully");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Car with ID " + id + " could not found");
+        }
+    }
 
 
    //Get car by its ID

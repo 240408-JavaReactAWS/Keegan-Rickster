@@ -1,5 +1,6 @@
 package com.SpringCar.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.util.Objects;
@@ -17,6 +18,7 @@ public class Car {
     private String color;
     @ManyToOne
     @JoinColumn(name = "fk_user_id")
+    @JsonIgnoreProperties({ "password" })
     private User user;
 
     public Car() {
